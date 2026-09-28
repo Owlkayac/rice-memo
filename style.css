@@ -1,0 +1,72 @@
+:root{
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  color-scheme:light dark;
+  --bg:#f1f4f0; --surface:#ffffff; --ink:#1c2a20; --sub:#5d6d62; --line:#d8dfd7;
+  --brand:#2f6a3f; --brand-ink:#ffffff; --soft:#e3ecdf; --warn:#a4452c;
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --bg:#121a15; --surface:#1b261f; --ink:#e6eee7; --sub:#9db0a2; --line:#2c3b31;
+    --brand:#6fb17f; --brand-ink:#0f1a13; --soft:#243328; --warn:#e58a6f;
+  }
+}
+html{scroll-padding-top:env(safe-area-inset-top,0px);height:100%}
+*,*::before,*::after{box-sizing:inherit}
+body{
+  margin:0;min-height:100%;background:var(--bg);color:var(--ink);
+  font-family:"Hiragino Sans","Hiragino Kaku Gothic ProN","Yu Gothic UI","Yu Gothic",Meiryo,sans-serif;
+  font-size:16px;line-height:1.7;-webkit-text-size-adjust:100%;
+  padding-bottom:calc(76px + env(safe-area-inset-bottom,0px));
+}
+header{padding:16px 18px 6px;display:flex;align-items:baseline;justify-content:space-between;gap:12px}
+h1{font-size:22px;margin:0;font-weight:700;letter-spacing:.02em}
+.count{color:var(--sub);font-size:13px}
+main{max-width:640px;margin:0 auto;padding:8px 14px 24px}
+section[hidden]{display:none}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px;margin:0 0 12px}
+label{display:block;font-size:13px;color:var(--sub);margin:0 0 4px;font-weight:500}
+input,textarea,select{
+  width:100%;font:inherit;color:var(--ink);background:var(--bg);
+  border:1px solid var(--line);border-radius:10px;padding:10px 12px;
+}
+textarea{min-height:130px;resize:vertical}
+input:focus-visible,textarea:focus-visible,select:focus-visible,button:focus-visible{outline:2px solid var(--brand);outline-offset:2px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}
+.field{margin-bottom:12px}
+button{font:inherit;cursor:pointer;border-radius:10px;border:1px solid var(--line);background:var(--surface);color:var(--ink);padding:10px 14px;min-height:44px}
+button.primary{background:var(--brand);color:var(--brand-ink);border-color:var(--brand);font-weight:700;width:100%}
+button.ghost{background:transparent}
+button.wide{width:100%;margin-bottom:12px}
+button:disabled{opacity:.55;cursor:default}
+.hint{font-size:13px;color:var(--sub);margin:8px 0 0}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(88px + env(safe-area-inset-bottom,0px));background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:999px;font-size:14px;max-width:88vw;z-index:20}
+.toast[hidden]{display:none}
+nav{
+  position:fixed;left:0;right:0;bottom:0;display:grid;grid-template-columns:repeat(3,1fr);
+  background:var(--surface);border-top:1px solid var(--line);
+  padding-bottom:env(safe-area-inset-bottom,0px);z-index:10;
+}
+nav button{border:0;border-radius:0;background:transparent;color:var(--sub);min-height:60px;font-weight:500}
+nav button[aria-selected="true"]{color:var(--brand);font-weight:700;box-shadow:inset 0 3px 0 var(--brand)}
+.filters{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px}
+.filters .full{grid-column:1/-1}
+.note-head{font-size:13px;color:var(--sub);margin-bottom:6px}
+.note-text{white-space:pre-wrap;word-break:break-word;margin:0 0 8px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.cat-select{width:auto;padding:4px 26px 4px 10px;border-radius:999px;font-size:13px;font-weight:700;border:0;color:#fff}
+.kw{font-size:12px;background:var(--soft);border-radius:999px;padding:1px 9px}
+.src{font-size:12px;color:var(--sub)}
+.del{margin-left:auto;padding:4px 10px;min-height:32px;font-size:13px;color:var(--warn);background:transparent;border-color:transparent}
+.empty{text-align:center;color:var(--sub);padding:28px 8px}
+.empty.small{padding:8px}
+.bar-row{display:grid;grid-template-columns:76px 1fr 34px;gap:8px;align-items:center;font-size:14px;margin:6px 0}
+.bar-track{background:var(--soft);border-radius:6px;height:14px;overflow:hidden}
+.bar-fill{height:100%;border-radius:6px}
+h2{font-size:16px;margin:0 0 8px}
+.last-year{padding-left:18px;margin:0}
+.last-year li{margin-bottom:6px}
+.last-year li.none{list-style:none;color:var(--sub);margin-left:-18px}
+.tools{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.tools button{flex:1}
+@media (prefers-reduced-motion:no-preference){.bar-fill{transition:width .3s ease}}

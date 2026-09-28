@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>農業メモ</title>
+<meta name="theme-color" content="#2f6a3f">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="農業メモ">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="icon" href="./icons/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="./icons/apple-touch-icon.png">
+<link rel="stylesheet" href="./style.css">
+</head>
+<body>
+<header>
+  <h1>農業メモ</h1>
+  <span class="count" id="count"></span>
+</header>
+<main>
+  <section id="tab-write">
+    <div class="card">
+      <div class="row">
+        <div><label for="f-date">日付</label><input id="f-date" type="date"></div>
+        <div><label for="f-field">圃場</label><input id="f-field" list="field-list" placeholder="例:北の田" autocomplete="off"></div>
+      </div>
+      <datalist id="field-list"></datalist>
+      <div class="field">
+        <label for="f-text">メモ</label>
+        <textarea id="f-text" placeholder="例:北の田の水位を確認。葉色が少し薄いので穂肥を検討。"></textarea>
+      </div>
+      <button class="primary" id="save">保存して分類</button>
+      <p class="hint" id="status"></p>
+    </div>
+    <div class="card">
+      <h2>データの保存</h2>
+      <p class="hint" style="margin-top:0">メモはこの端末のブラウザに保存されます。ブラウザのデータを消すと失われるので、定期的に書き出してください。</p>
+      <div class="tools">
+        <button id="export">書き出し(JSON)</button>
+        <button id="import-btn">読み込み</button>
+      </div>
+      <input id="import-file" type="file" accept=".json,application/json" hidden>
+    </div>
+  </section>
+
+  <section id="tab-list" hidden>
+    <div class="filters">
+      <select id="l-cat" aria-label="分野で絞り込み"></select>
+      <select id="l-field" aria-label="圃場で絞り込み"></select>
+      <input class="full" id="l-q" type="search" placeholder="キーワードで検索" aria-label="検索">
+    </div>
+    <button class="ghost wide" id="reclassify">分類をやり直す(手動で変えたもの以外)</button>
+    <div id="list"></div>
+  </section>
+
+  <section id="tab-stats" hidden>
+    <div class="card">
+      <label for="s-range">期間</label>
+      <select id="s-range">
+        <option value="30">直近30日</option>
+        <option value="90" selected>直近90日</option>
+        <option value="year">今年</option>
+        <option value="all">すべて</option>
+      </select>
+    </div>
+    <div class="card"><h2>分野別の件数</h2><div id="st-cat"></div></div>
+    <div class="card"><h2>圃場別の件数</h2><div id="st-field"></div></div>
+    <div class="card"><h2>月ごとの推移</h2><div id="st-month"></div></div>
+    <div class="card"><h2>よく出るキーワード</h2><div id="st-kw" class="chips"></div></div>
+    <div class="card"><h2>去年の同じ時期(前後15日)</h2><ul id="st-last" class="last-year"></ul></div>
+  </section>
+</main>
+
+<nav role="tablist" aria-label="画面切り替え">
+  <button role="tab" data-tab="write" aria-selected="true">記録</button>
+  <button role="tab" data-tab="list" aria-selected="false">一覧</button>
+  <button role="tab" data-tab="stats" aria-selected="false">分析</button>
+</nav>
+<div class="toast" id="toast" hidden></div>
+
+<script src="./app.js"></script>
+</body>
+</html>
